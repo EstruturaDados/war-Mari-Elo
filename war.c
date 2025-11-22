@@ -1,7 +1,7 @@
 // ============================================================================
 //         PROJETO WAR ESTRUTURADO - DESAFIO DE CÓDIGO
 // ============================================================================
-//        
+//
 // ============================================================================
 //
 // OBJETIVOS:
@@ -31,29 +31,55 @@
 
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
-int main() {
-    // 1. Configuração Inicial (Setup):
-    // - Define o locale para português.
-    // - Inicializa a semente para geração de números aleatórios com base no tempo atual.
-    // - Aloca a memória para o mapa do mundo e verifica se a alocação foi bem-sucedida.
-    // - Preenche os territórios com seus dados iniciais (tropas, donos, etc.).
-    // - Define a cor do jogador e sorteia sua missão secreta.
 
-    // 2. Laço Principal do Jogo (Game Loop):
-    // - Roda em um loop 'do-while' que continua até o jogador sair (opção 0) ou vencer.
-    // - A cada iteração, exibe o mapa, a missão e o menu de ações.
-    // - Lê a escolha do jogador e usa um 'switch' para chamar a função apropriada:
-    //   - Opção 1: Inicia a fase de ataque.
-    //   - Opção 2: Verifica se a condição de vitória foi alcançada e informa o jogador.
-    //   - Opção 0: Encerra o jogo.
-    // - Pausa a execução para que o jogador possa ler os resultados antes da próxima rodada.
+// Nivel novato
+// criando estruturando uma struct em C
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-    // 3. Limpeza:
-    // - Ao final do jogo, libera a memória alocada para o mapa para evitar vazamentos de memória.
+typedef struct
+{
+    char nome[50];
+    int tropas;
+    char cor[10];
+} territorio;
+
+int main()
+{
+
+    territorio Territorios[5];
+
+    // loop para preencher os dados dos territórios
+    for (int i = 0; i < 5; i++)
+    {
+        // nome do território
+        printf("Digite o nome do território %d: ", i + 1);
+        fgets(Territorios[i].nome, sizeof(Territorios[i].nome), stdin);
+        Territorios[i].nome[strcspn(Territorios[i].nome, "\n")] = '\0'; // remover o \n do final
+                                                                        // cor da tropa
+        printf("Digite a cor da tropa do território %d: ", i + 1);
+        fgets(Territorios[i].cor, sizeof(Territorios[i].cor), stdin);
+        Territorios[i].cor[strcspn(Territorios[i].cor, "\n")] = '\0'; // remover o \n do final
+                                                                      // número de tropas
+        printf("Digite o número de tropas do território %d: ", i + 1);
+        scanf("%d", &Territorios[i].tropas);
+        getchar(); // limpar o buffer do teclado
+    }
+
+    // exibição dos dados dos territórios
+
+    printf("\n=== Dados dos Territórios Cadastrados ===\n");
+    for (int i = 0; i < 5; i++)
+    {
+        printf("\nTerritório %d:\n", i + 1);
+        printf("Nome: %s\n", Territorios[i].nome);
+        printf("Cor do exército: %s\n", Territorios[i].cor);
+        printf("Quantidade de tropas: %d\n", Territorios[i].tropas);
+    }
 
     return 0;
 }
-
 // --- Implementação das Funções ---
 
 // alocarMapa():
